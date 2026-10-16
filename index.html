@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Only You</title>
+<title>Present For You</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Figtree:wght@400;500;600;700;800&display=swap">
 <style>
@@ -27,7 +27,9 @@ body { font-family: var(--body); font-size: 15px; line-height: 1.5; overflow-x: 
 button { font: inherit; color: inherit; }
 .gutter { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 @media (min-width: 900px) { .gutter { padding-left: max(52px, env(safe-area-inset-left, 0px)); padding-right: max(52px, env(safe-area-inset-right, 0px)); } }
-.logo { font-family: var(--display); color: var(--accent); letter-spacing: .02em; text-transform: uppercase; line-height: 1; text-shadow: 0 2px 12px rgba(255,59,107,.35); }
+.logo { font-family: var(--display); color: #e50914; letter-spacing: .01em; text-transform: uppercase; line-height: 1; text-shadow: 0 2px 10px rgba(0,0,0,.55); }
+/* Netflix-style bowed wordmark: letters grow toward the edges */
+.logo .cv { display: inline-block; font-style: normal; transform: scaleY(var(--s, 1)); }
 
 /* Intro sting */
 .intro { position: fixed; inset: 0; z-index: 100; background: #000; display: grid; place-items: center; cursor: pointer; overflow: hidden; }
@@ -38,7 +40,7 @@ button { font: inherit; color: inherit; }
 @keyframes letter { to { opacity: 1; transform: none; filter: blur(0); } }
 .intro .sweep { position: absolute; inset: -20% -10%; background: linear-gradient(100deg, transparent 35%, rgba(255,255,255,.75) 50%, transparent 65%); mix-blend-mode: overlay; transform: translateX(-120%); animation: sweep 1.2s ease 1.3s forwards; pointer-events: none; }
 @keyframes sweep { to { transform: translateX(120%); } }
-.intro .glow { position: absolute; width: 70vmin; height: 70vmin; border-radius: 50%; background: radial-gradient(circle, rgba(255,59,107,.35), transparent 65%); opacity: 0; animation: glow 2.4s ease .8s forwards; }
+.intro .glow { position: absolute; width: 70vmin; height: 70vmin; border-radius: 50%; background: radial-gradient(circle, rgba(229,9,20,.4), transparent 65%); opacity: 0; animation: glow 2.4s ease .8s forwards; }
 @keyframes glow { 50% { opacity: 1; } to { opacity: .6; } }
 .intro.out .mark { animation: zoomout .9s cubic-bezier(.6,0,.9,.4) forwards; }
 .intro.out { animation: fadeout .5s ease .65s forwards; }
@@ -325,7 +327,7 @@ header .me .sw { font-size: 13px; color: #ddd; font-weight: 600; }
 </div>
 
 <header class="top gutter" id="hdr">
-  <div class="logo" id="logoHome" role="link" tabindex="0">Only You</div>
+  <div class="logo" id="logoHome" role="link" tabindex="0" aria-label="Present For You"></div>
   <nav id="tabs"><button type="button" data-view="home" aria-current="page">Home</button><button type="button" data-view="series">Series</button><button type="button" data-view="birthdays">Birthdays</button><button type="button" data-view="list">My List</button></nav>
   <button class="me" id="me" type="button" aria-label="Switch profile"><span class="av" id="meAv"></span><span class="sw">Switch profile</span><svg width="12" height="12" viewBox="0 0 24 24" fill="#fff"><path d="M5 8l7 8 7-8z"/></svg></button>
 </header>
@@ -334,7 +336,7 @@ header .me .sw { font-size: 13px; color: #ddd; font-weight: 600; }
   <div class="bg" id="herobg"></div>
   <div class="shade"></div>
   <div class="hero-in gutter">
-    <div class="badge"><span class="logo">O</span>Series</div>
+    <div class="badge"><span class="logo">P</span>Series</div>
     <h2>The Birthday Girl</h2>
     <div class="meta"><span class="m">100% Match</span><span>2026</span><span class="tag">ALL HEARTS</span><span>Season 1</span><span class="tag">HD</span></div>
     <p class="desc">She walks in and the whole room gets brighter. A warm, funny, impossibly beautiful series about the most special person in the world. Today is the season premiere.</p>
@@ -455,15 +457,19 @@ if (rest.length) ROWS.push({ t: "More Episodes", ids: rest, kind: "poster" });
 const mark = document.getElementById("mark");
 const intro = document.getElementById("intro"), profiles = document.getElementById("profiles");
 let introDone = false, introTimer = 0, pfFrom = "intro";
+const WORDMARK = "PRESENT FOR YOU";
+const bow = i => { const c = (WORDMARK.length - 1) / 2, d = (i - c) / c; return (1 + 0.32 * d * d).toFixed(3); };
+const cv = (ch, i) => `<i class="cv" style="--s:${bow(i)}">${ch === " " ? "&nbsp;" : ch}</i>`;
 function buildMark() {
   mark.innerHTML = "";
-  "ONLY YOU".split("").forEach((ch, i) => {
+  WORDMARK.split("").forEach((ch, i) => {
     const s = document.createElement("span");
-    s.textContent = ch === " " ? "\u00a0" : ch;
-    s.style.animationDelay = (0.15 + i * 0.07) + "s";
+    s.innerHTML = cv(ch, i);
+    s.style.animationDelay = (0.15 + i * 0.06) + "s";
     mark.appendChild(s);
   });
 }
+document.getElementById("logoHome").innerHTML = WORDMARK.split("").map(cv).join("");
 function playIntro() {
   introDone = false;
   intro.hidden = false; intro.classList.remove("out");
