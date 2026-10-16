@@ -220,6 +220,59 @@ header .me .sw { font-size: 13px; color: #ddd; font-weight: 600; }
 .p-stage .side.r { right: max(10px, env(safe-area-inset-right, 0px)); }
 .p-stage .side svg { width: 26px; height: 26px; }
 
+/* More Info popup */
+.info { position: fixed; inset: 0; z-index: 150; background: rgba(0,0,0,.72); backdrop-filter: blur(4px); overflow-y: auto; overscroll-behavior: contain; padding: 40px 16px; animation: ifade .3s ease; }
+@keyframes ifade { from { opacity: 0; } }
+.i-card { position: relative; max-width: 860px; margin: 0 auto; background: #141417; border-radius: 10px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,.7); animation: irise .45s cubic-bezier(.2,.8,.2,1); }
+@keyframes irise { from { transform: translateY(40px) scale(.96); opacity: 0; } }
+.i-x { position: absolute; top: 14px; right: 14px; z-index: 5; width: 40px; height: 40px; border-radius: 50%; border: 0; background: #141417; color: #fff; display: grid; place-items: center; cursor: pointer; }
+.i-x:focus-visible { outline: 2px solid #fff; }
+.i-x svg { width: 22px; height: 22px; }
+.i-media { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: #000; touch-action: pan-y; }
+.i-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.1s ease; }
+.i-slide.on { opacity: 1; }
+.i-slide .blur { position: absolute; inset: -40px; background-size: cover; background-position: center; filter: blur(30px) brightness(.5); }
+.i-slide img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.i-slide.on img { animation: kb 6s ease-out forwards; }
+.i-media .i-shade { position: absolute; inset: 0; background: linear-gradient(0deg, #141417 0%, rgba(20,20,23,.4) 35%, transparent 60%); pointer-events: none; }
+.i-head { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; display: grid; gap: 14px; padding: 0 clamp(16px, 4vw, 44px) 22px; }
+.i-head h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(34px, 6vw, 62px); line-height: .95; text-transform: uppercase; text-shadow: 0 4px 24px rgba(0,0,0,.7); }
+.i-head .btns { margin: 0; }
+.i-bars { position: absolute; top: 14px; left: clamp(16px, 4vw, 44px); right: 66px; z-index: 3; display: flex; gap: 4px; }
+.i-bars i { flex: 1; height: 3px; border-radius: 2px; background: rgba(255,255,255,.3); overflow: hidden; }
+.i-bars i b { display: block; height: 100%; width: 0; background: #fff; }
+.i-bars i.done b { width: 100%; }
+.i-bars i.on b { animation: bar 3.6s linear forwards; }
+@keyframes bar { to { width: 100%; } }
+.i-body { padding: 8px clamp(16px, 4vw, 44px) 36px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 30px; }
+.i-body > * { min-width: 0; }
+.i-top { display: grid; gap: 22px; }
+@media (min-width: 700px) { .i-top { grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 32px; } }
+.i-top p { margin: 10px 0 0; color: #e4e4e8; font-size: 16px; }
+.i-facts { display: grid; gap: 10px; font-size: 14px; color: #ddd; align-content: start; }
+.i-facts span { color: #77777f; }
+.i-body h3 { margin: 0 0 12px; font-size: 22px; font-weight: 700; }
+.eps { display: grid; border-top: 1px solid #2a2a30; }
+.ep-r { display: grid; grid-template-columns: 22px 116px 1fr; gap: 14px; align-items: center; padding: 16px 8px; border-bottom: 1px solid #2a2a30; border-radius: 6px; cursor: pointer; transition: background .2s; }
+.ep-r:hover, .ep-r:focus-visible { background: #222227; outline: none; }
+.ep-r .n { font-size: 22px; color: #9a9aa2; text-align: center; }
+.ep-r .th { aspect-ratio: 16 / 9; border-radius: 4px; overflow: hidden; }
+.ep-r .th img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; display: block; }
+.ep-r b { display: block; font-size: 15px; }
+.ep-r .loc { display: block; color: var(--accent-2); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin: 2px 0 4px; }
+.ep-r p { margin: 0; color: #b4b4bc; font-size: 13.5px; line-height: 1.45; }
+.ep-r .now { display: inline-block; margin-left: 6px; background: var(--accent); color: #fff; font-size: 10px; font-weight: 800; padding: 1px 6px; border-radius: 3px; vertical-align: 2px; }
+@media (max-width: 520px) { .ep-r { grid-template-columns: 96px 1fr; } .ep-r .n { display: none; } }
+.marq { overflow: hidden; margin-inline: calc(-1 * clamp(16px, 4vw, 44px)); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.marq .trk { display: flex; gap: 8px; width: max-content; animation: marq 50s linear infinite; }
+.marq:hover .trk { animation-play-state: paused; }
+.marq img { width: 110px; aspect-ratio: 2 / 3; object-fit: cover; object-position: 50% 25%; border-radius: 5px; display: block; }
+@keyframes marq { to { transform: translateX(-50%); } }
+.i-about { display: grid; gap: 8px; font-size: 14px; color: #ddd; }
+.i-about span { color: #77777f; }
+@media (max-width: 699px) { .info { padding: 0; } .i-card { border-radius: 0; min-height: 100%; } .i-media { aspect-ratio: 4 / 5; } }
+@media (prefers-reduced-motion: reduce) { .marq .trk, .i-slide.on img { animation: none; } }
+
 /* Player */
 .player { position: fixed; inset: 0; z-index: 200; background: #000; display: grid; grid-template-rows: auto 1fr auto; }
 .p-top { display: flex; align-items: center; gap: 14px; padding-top: calc(14px + env(safe-area-inset-top, 0px)); padding-bottom: 10px; z-index: 2; }
@@ -307,6 +360,56 @@ header .me .sw { font-size: 13px; color: #ddd; font-weight: 600; }
   <h4>Happy birthday. Every chapter of my life is better with <em>you</em> in it.</h4>
 </section>
 <footer class="gutter">Made with love, for your birthday.</footer>
+
+<!-- More Info -->
+<div class="info" id="info" hidden role="dialog" aria-modal="true" aria-labelledby="iTitle">
+  <div class="i-card">
+    <button class="i-x" id="iClose" type="button" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <div class="i-media" id="iMedia">
+      <div id="iSlides"></div>
+      <div class="i-bars" id="iBars"></div>
+      <div class="i-shade"></div>
+      <div class="i-head">
+        <h2 id="iTitle">Simrajit Kaur Cheema</h2>
+        <div class="btns"><button class="btn play" id="iPlay" type="button"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l12-7.5z"/></svg>Play</button></div>
+      </div>
+    </div>
+    <div class="i-body">
+      <div class="i-top">
+        <div>
+          <div class="meta"><span class="m">100% Match</span><span>Premieres 20 Oct</span><span class="tag">ALL HEARTS</span><span>Season 1</span><span class="tag">HD</span></div>
+          <p>From Jharkhand to Punjab to Barrie, Canada, Simrajit has written every chapter of her story herself. An MBA graduate who crossed an ocean, started from scratch and never stopped working for it. The hardest-working girl in any room, and the warmest. New season drops every year on 20 October.</p>
+        </div>
+        <div class="i-facts">
+          <div><span>Starring:</span> Simrajit Kaur Cheema</div>
+          <div><span>Birthday:</span> 20 October</div>
+          <div><span>Genres:</span> Hard Work, Big Dreams, Coffee</div>
+          <div><span>This show is:</span> Inspiring, Warm, Unstoppable</div>
+        </div>
+      </div>
+      <div>
+        <h3>Episodes</h3>
+        <div class="eps" id="iEps"></div>
+      </div>
+      <div>
+        <h3>Behind the Scenes</h3>
+        <div class="marq"><div class="trk" id="iMarq"></div></div>
+      </div>
+      <div>
+        <h3>About <i style="font-style:normal;color:var(--accent)">The Birthday Girl</i></h3>
+        <div class="i-about">
+          <div><span>Full name:</span> Simrajit Kaur Cheema</div>
+          <div><span>Born in:</span> Jharkhand, India</div>
+          <div><span>Hometown:</span> Shri Hargobindpur, Punjab</div>
+          <div><span>Education:</span> MBA, Guru Nanak Dev University Campus</div>
+          <div><span>Now living in:</span> Barrie, Ontario, Canada</div>
+          <div><span>Currently:</span> Working at Starbucks (previously Popeyes)</div>
+          <div><span>Known for:</span> Working harder than anyone, and smiling through all of it</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Player -->
 <div class="player" id="player" hidden role="dialog" aria-modal="true" aria-label="Episode player">
@@ -586,7 +689,63 @@ function openPlayer(i, auto) {
 }
 function closePlayer() { setPlaying(false); player.hidden = true; document.body.style.overflow = ""; }
 document.getElementById("playBtn").onclick = () => openPlayer(22, true);
-document.getElementById("infoBtn").onclick = () => document.getElementById("rows").scrollIntoView({ behavior: "smooth" });
+/* More Info popup: her story, with a slider that keeps playing while open */
+const info = document.getElementById("info"), iSlides = document.getElementById("iSlides"), iBars = document.getElementById("iBars");
+const INFO_PICS = [22, 59, 41, 33, 67, 79, 9, 60, 35, 12, 47, 28];
+const STORY = [
+  [44, "Origins", "Jharkhand, India", "Where it all begins. Born on 20 October, and the world got a little brighter."],
+  [9, "Home Ground", "Shri Hargobindpur, Punjab", "The hometown that shaped her: family, roots, and a heart full of Punjab."],
+  [33, "The MBA Arc", "Guru Nanak Dev University Campus", "Late nights, big goals, and an MBA earned the hard way."],
+  [67, "New Country, Same Spark", "Barrie, Canada", "She packed up her dreams, crossed an ocean, and started from scratch."],
+  [71, "The Popeyes Season", "First job in Canada", "Long shifts, new city, zero complaints. Proof that nothing scares her."],
+  [62, "Now Brewing", "Starbucks", "Today she's at Starbucks, still the hardest-working person on every shift.", true],
+];
+INFO_PICS.forEach((id, k) => {
+  const d = document.createElement("div"); d.className = "i-slide";
+  d.innerHTML = `<div class="blur" style="background-image:url(${F(id)})"></div><img src="${F(id)}" alt="" loading="lazy">`;
+  iSlides.appendChild(d);
+  iBars.appendChild(Object.assign(document.createElement("i"), { innerHTML: "<b></b>" }));
+});
+const iEps = document.getElementById("iEps");
+STORY.forEach(([id, t, loc, txt, now], k) => {
+  const r = document.createElement("div"); r.className = "ep-r"; r.tabIndex = 0; r.setAttribute("role", "button");
+  r.innerHTML = `<span class="n">${k + 1}</span><div class="th"><img src="${T(id)}" alt="" loading="lazy"></div><div><b>${t}${now ? '<span class="now">NOW</span>' : ""}</b><span class="loc">${loc}</span><p>${txt}</p></div>`;
+  const go = () => { closeInfo(); openPlayer(id, true); };
+  r.onclick = go; r.onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } };
+  iEps.appendChild(r);
+});
+const marqIds = range(42, 61);
+document.getElementById("iMarq").innerHTML = [...marqIds, ...marqIds].map(id => `<img src="${T(id)}" alt="" loading="lazy">`).join("");
+let iK = 0, iTimer = 0;
+function infoGo(k) {
+  const sl = iSlides.children, bars = iBars.children;
+  sl[iK].classList.remove("on");
+  iK = (k + sl.length) % sl.length;
+  sl[iK].classList.add("on");
+  [...bars].forEach((b, i) => { b.classList.remove("on"); b.classList.toggle("done", i < iK); });
+  void iBars.offsetWidth; bars[iK].classList.add("on");
+  clearTimeout(iTimer); iTimer = setTimeout(() => infoGo(iK + 1), 3600);
+}
+function openInfo() {
+  info.hidden = false; info.scrollTop = 0; document.body.style.overflow = "hidden";
+  infoGo(0);
+  document.getElementById("iClose").focus();
+}
+function closeInfo() { info.hidden = true; clearTimeout(iTimer); document.body.style.overflow = ""; }
+document.getElementById("infoBtn").onclick = openInfo;
+document.getElementById("iClose").onclick = closeInfo;
+document.getElementById("iPlay").onclick = () => { closeInfo(); openPlayer(INFO_PICS[iK], true); };
+info.addEventListener("click", e => { if (e.target === info) closeInfo(); });
+addEventListener("keydown", e => { if (!info.hidden && e.key === "Escape") closeInfo(); });
+const iMedia = document.getElementById("iMedia");
+let ix = null;
+iMedia.addEventListener("touchstart", e => { ix = e.touches[0].clientX; }, { passive: true });
+iMedia.addEventListener("touchend", e => {
+  if (ix === null) return;
+  const dx = e.changedTouches[0].clientX - ix;
+  if (Math.abs(dx) > 45) infoGo(iK + (dx < 0 ? 1 : -1));
+  ix = null;
+});
 document.getElementById("pBack").onclick = closePlayer;
 document.getElementById("pList").onclick = () => toggleList(cur);
 document.getElementById("pNext").onclick = () => { load(cur + 1); pProg.style.width = "0"; };
