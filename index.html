@@ -93,10 +93,10 @@ header nav button:focus-visible { outline: 2px solid #fff; }
 .hero .slide.on .pic { animation: kb 14s ease-out forwards; }
 @keyframes kb { from { transform: scale(1.12); } to { transform: scale(1); } }
 .hero .shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(11,11,13,.92) 0%, rgba(11,11,13,.55) 40%, transparent 70%), linear-gradient(0deg, var(--bg) 0%, transparent 32%); }
-.hero-in { display: grid; gap: 14px; max-width: 560px; padding-block: 120px 9vh; }
+.hero-in { display: grid; gap: clamp(10px, 1.6vh, 14px); max-width: 680px; padding-block: clamp(90px, 13vh, 130px) clamp(28px, 7vh, 80px); }
 .badge { display: flex; align-items: center; gap: 8px; font-size: 13px; letter-spacing: .35em; text-transform: uppercase; color: #ddd; font-weight: 600; }
 .badge .logo { font-size: 22px; letter-spacing: 0; }
-.hero h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(54px, 9vw, 112px); line-height: .92; text-transform: uppercase; letter-spacing: .01em; text-wrap: balance; text-shadow: 0 6px 30px rgba(0,0,0,.6); }
+.hero h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(54px, min(7vw, 11vh), 112px); line-height: .92; text-transform: uppercase; letter-spacing: .01em; text-wrap: balance; text-shadow: 0 6px 30px rgba(0,0,0,.6); }
 .meta { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; font-size: 14px; color: #ddd; font-weight: 500; }
 .meta .m { color: var(--match); font-weight: 700; }
 .meta .tag { border: 1px solid rgba(255,255,255,.5); padding: 0 6px; border-radius: 3px; font-size: 12px; }
