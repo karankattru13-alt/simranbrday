@@ -306,7 +306,15 @@ header .me .sw { font-size: 13px; color: #ddd; font-weight: 600; }
 </style>
 <style>body{margin:0}
 /* Hide the host-injected "Powered by Netlify" badge */
-a[href*="netlify.com"], a[href*="netlify.app/?"], [id*="netlify" i], [class*="netlify" i], iframe[src*="netlify"], netlify-badge { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; }</style>
+#nl-badge-frame, iframe[id^="nl-badge"], a[href*="netlify.com"], [id*="netlify" i], [class*="netlify" i], iframe[src*="netlify"] { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; width: 0 !important; height: 0 !important; }</style>
+<script>
+/* Inline styles on the injected badge frame can beat CSS, so also remove it whenever it appears */
+(() => {
+  const zap = () => document.querySelectorAll('#nl-badge-frame, iframe[id^="nl-badge"]').forEach(el => el.remove());
+  new MutationObserver(zap).observe(document.documentElement, { childList: true, subtree: true });
+  addEventListener("DOMContentLoaded", zap);
+})();
+</script>
 </head>
 <body>
 
