@@ -384,7 +384,7 @@ header .me .sw { font-size: 13px; color: #ddd; font-weight: 600; }
       <div class="i-bars" id="iBars"></div>
       <div class="i-shade"></div>
       <div class="i-head">
-        <h2 id="iTitle">Simrajit Kaur Cheema</h2>
+        <h2 id="iTitle">Simranjit Kaur Cheema</h2>
         <div class="btns"><button class="btn play" id="iPlay" type="button"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l12-7.5z"/></svg>Play</button></div>
       </div>
     </div>
@@ -392,10 +392,10 @@ header .me .sw { font-size: 13px; color: #ddd; font-weight: 600; }
       <div class="i-top">
         <div>
           <div class="meta"><span class="m">100% Match</span><span>Based on a true story</span><span class="tag">TRUE STORY</span><span>Volume 1</span><span class="tag">HD</span></div>
-          <p>From Jharkhand to Punjab to Barrie, Canada, Simrajit has written every chapter of her story herself. An MBA graduate who crossed an ocean, started from scratch and never stopped working for it. The hardest-working girl in any room, and the warmest. No shortcuts, no excuses, every page earned.</p>
+          <p>From Jharkhand to Punjab to Barrie, Canada, Simranjit has written every chapter of her story herself. An MBA graduate who crossed an ocean, started from scratch and never stopped working for it. The hardest-working girl in any room, and the warmest. No shortcuts, no excuses, every page earned.</p>
         </div>
         <div class="i-facts">
-          <div><span>Starring:</span> Simrajit Kaur Cheema</div>
+          <div><span>Starring:</span> Simranjit Kaur Cheema</div>
           <div><span>Written by:</span> Herself</div>
           <div><span>Genres:</span> Hard Work, Big Dreams, Coffee</div>
           <div><span>This show is:</span> Inspiring, Warm, Unstoppable</div>
@@ -412,7 +412,7 @@ header .me .sw { font-size: 13px; color: #ddd; font-weight: 600; }
       <div>
         <h3>About <i style="font-style:normal;color:var(--accent)">the Author</i></h3>
         <div class="i-about">
-          <div><span>Full name:</span> Simrajit Kaur Cheema</div>
+          <div><span>Full name:</span> Simranjit Kaur Cheema</div>
           <div><span>Born in:</span> Jharkhand, India</div>
           <div><span>Hometown:</span> Shri Hargobindpur, Punjab</div>
           <div><span>Education:</span> MBA, Guru Nanak Dev University Campus</div>
@@ -511,7 +511,7 @@ document.getElementById("pfBack").addEventListener("click", () => {
 playIntro();
 
 /* Profiles */
-const PROFILES = [[22, "Simrajit"], [59, "Princess"], [9, "Sunshine"], [79, "Superstar"]];
+const PROFILES = [[22, "Simranjit"], [59, "Princess"], [9, "Sunshine"], [79, "Superstar"]];
 const pfgrid = document.getElementById("pfgrid");
 PROFILES.forEach(([id, name]) => {
   const b = document.createElement("button");
@@ -769,7 +769,7 @@ document.getElementById("pBack").onclick = closePlayer;
 document.getElementById("pList").onclick = () => toggleList(cur);
 /* Download the full-size photo; fetch as a blob so the browser saves it instead of navigating, falling back to a plain download link */
 document.getElementById("pDl").onclick = async () => {
-  const src = F(cur), name = `simrajit-${pad(cur)}.jpg`;
+  const src = F(cur), name = `simranjit-${pad(cur)}.jpg`;
   const save = href => { const a = document.createElement("a"); a.href = href; a.download = name; document.body.appendChild(a); a.click(); a.remove(); };
   try {
     const res = await fetch(src);
