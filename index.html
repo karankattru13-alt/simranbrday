@@ -209,6 +209,8 @@ footer { color: #6b6b74; font-size: 13px; text-align: center; padding-block: 0 c
 .p-top .lst { margin-left: auto; width: auto; height: 40px; border-radius: 999px; padding: 0 14px; gap: 6px; display: flex; border: 1px solid rgba(255,255,255,.4); color: #fff; font-weight: 700; font-size: 14px; }
 .p-top .lst svg { width: 18px; height: 18px; }
 .p-top .lst.on { background: var(--accent); border-color: var(--accent); }
+.p-top .dl { margin-left: 0; }
+@media (max-width: 520px) { .p-top .dl span { display: none; } }
 header .me { margin-left: auto; display: flex; align-items: center; gap: 6px; background: none; border: 0; padding: 4px; cursor: pointer; border-radius: 6px; }
 header .me:focus-visible { outline: 2px solid #fff; }
 header .me .av { width: 34px; height: 34px; border-radius: 5px; overflow: hidden; }
@@ -429,6 +431,7 @@ header .me .sw { font-size: 13px; color: #ddd; font-weight: 600; }
     <button id="pBack" type="button" aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><path d="M15 5l-7 7 7 7"/></svg></button>
     <div class="t"><b>The Birthday Girl</b><span id="pEp"></span></div>
     <button class="lst" id="pList" type="button"></button>
+    <button class="lst dl" id="pDl" type="button" aria-label="Download this photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></svg><span>Download</span></button>
   </div>
   <div class="p-stage" id="pStage"><div class="bgb" id="pBg"></div><img id="pImg" alt=""><button class="side l" id="sPrev" type="button" aria-label="Previous episode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><button class="side r" id="sNext" type="button" aria-label="Next episode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button></div>
   <div class="p-bot gutter">
@@ -764,6 +767,18 @@ iMedia.addEventListener("touchend", e => {
 });
 document.getElementById("pBack").onclick = closePlayer;
 document.getElementById("pList").onclick = () => toggleList(cur);
+/* Download the full-size photo; fetch as a blob so the browser saves it instead of navigating, falling back to a plain download link */
+document.getElementById("pDl").onclick = async () => {
+  const src = F(cur), name = `birthday-photo-${pad(cur)}.jpg`;
+  const save = href => { const a = document.createElement("a"); a.href = href; a.download = name; document.body.appendChild(a); a.click(); a.remove(); };
+  try {
+    const res = await fetch(src);
+    if (!res.ok) throw new Error(res.status);
+    const url = URL.createObjectURL(await res.blob());
+    save(url);
+    setTimeout(() => URL.revokeObjectURL(url), 10000);
+  } catch { save(src); }
+};
 document.getElementById("pNext").onclick = () => { load(cur + 1); pProg.style.width = "0"; };
 document.getElementById("pPrev").onclick = () => { load(cur - 1); pProg.style.width = "0"; };
 document.getElementById("pPause").onclick = () => setPlaying(!playing);
