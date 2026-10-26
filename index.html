@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Present For You</title>
+<title>Her Story</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Figtree:wght@400;500;600;700;800&display=swap">
 <style>
-/* Layout: a streaming app where she is the only show. Intro sting, profile picker, cinematic hero, poster rows, closing lines. */
+/* Layout: a streaming app where her life story is the only show. Intro sting, profile picker, cinematic hero, poster rows, closing lines. */
 :root {
   --bg: #0b0b0d;
   --panel: #18181c;
@@ -196,7 +196,7 @@ footer { color: #6b6b74; font-size: 13px; text-align: center; padding-block: 0 c
 @keyframes ring { to { stroke-dashoffset: 0; } }
 @keyframes beat { 0%, 100% { transform: scale(1); } 15% { transform: scale(1.3); } 30% { transform: scale(1); } 45% { transform: scale(1.18); } }
 
-/* Grid views: Series, Birthdays, My List */
+/* Grid views: Series, Chapters, My List */
 .view { padding-top: calc(96px + env(safe-area-inset-top, 0px)); padding-bottom: 30px; min-height: 70vh; }
 @media (max-width: 899px) { .view { padding-top: calc(120px + env(safe-area-inset-top, 0px)); } }
 .view h2 { margin: 0 0 4px; font-family: var(--display); font-weight: 400; font-size: clamp(36px, 6vw, 64px); text-transform: uppercase; line-height: 1; }
@@ -339,8 +339,8 @@ header .me .sw { font-size: 13px; color: #ddd; font-weight: 600; }
 </div>
 
 <header class="top gutter" id="hdr">
-  <div class="logo" id="logoHome" role="link" tabindex="0" aria-label="Present For You"></div>
-  <nav id="tabs"><button type="button" data-view="home" aria-current="page">Home</button><button type="button" data-view="series">Series</button><button type="button" data-view="birthdays">Birthdays</button><button type="button" data-view="list">My List</button></nav>
+  <div class="logo" id="logoHome" role="link" tabindex="0" aria-label="Her Story"></div>
+  <nav id="tabs"><button type="button" data-view="home" aria-current="page">Home</button><button type="button" data-view="series">Series</button><button type="button" data-view="chapters">Chapters</button><button type="button" data-view="list">My List</button></nav>
   <button class="me" id="me" type="button" aria-label="Switch profile"><span class="av" id="meAv"></span><span class="sw">Switch profile</span><svg width="12" height="12" viewBox="0 0 24 24" fill="#fff"><path d="M5 8l7 8 7-8z"/></svg></button>
 </header>
 
@@ -348,10 +348,10 @@ header .me .sw { font-size: 13px; color: #ddd; font-weight: 600; }
   <div class="bg" id="herobg"></div>
   <div class="shade"></div>
   <div class="hero-in gutter">
-    <div class="badge"><span class="logo">P</span>Series</div>
-    <h2>The Birthday Girl</h2>
-    <div class="meta"><span class="m">100% Match</span><span>2026</span><span class="tag">ALL HEARTS</span><span>Season 1</span><span class="tag">HD</span></div>
-    <p class="desc">She walks in and the whole room gets brighter. A warm, funny, impossibly beautiful series about the most special person in the world. Today is the season premiere.</p>
+    <div class="badge"><span class="logo">H</span>Autobiography</div>
+    <h2>Written By Her</h2>
+    <div class="meta"><span class="m">100% Real</span><span>Jharkhand → Barrie</span><span class="tag">TRUE STORY</span><span>Volume 1</span><span class="tag">HD</span></div>
+    <p class="desc">Born in Jharkhand, raised in Punjab, now writing new chapters in Canada. I crossed an ocean with an MBA and a suitcase full of dreams, and built everything from scratch. This is my story, one frame at a time.</p>
     <div class="btns">
       <button class="btn play" id="playBtn" type="button"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l12-7.5z"/></svg>Play</button>
       <button class="btn info" id="infoBtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v6M12 7.5v.5"/></svg>More Info</button>
@@ -371,9 +371,9 @@ header .me .sw { font-size: 13px; color: #ddd; font-weight: 600; }
 
 <section class="lines gutter" id="lines">
   <div><div class="rule"></div><h4>The only show I'd binge <em>forever</em>.</h4></div>
-  <h4>Happy birthday. Every chapter of my life is better with <em>you</em> in it.</h4>
+  <h4>Her story is still being written. The best chapters haven't happened <em>yet</em>.</h4>
 </section>
-<footer class="gutter">Made with love, for your birthday.</footer>
+<footer class="gutter">Made with love, about the girl who writes her own story.</footer>
 
 <!-- More Info -->
 <div class="infobox" id="info" hidden role="dialog" aria-modal="true" aria-labelledby="iTitle">
@@ -391,12 +391,12 @@ header .me .sw { font-size: 13px; color: #ddd; font-weight: 600; }
     <div class="i-body">
       <div class="i-top">
         <div>
-          <div class="meta"><span class="m">100% Match</span><span>Premieres 20 Oct</span><span class="tag">ALL HEARTS</span><span>Season 1</span><span class="tag">HD</span></div>
-          <p>From Jharkhand to Punjab to Barrie, Canada, Simrajit has written every chapter of her story herself. An MBA graduate who crossed an ocean, started from scratch and never stopped working for it. The hardest-working girl in any room, and the warmest. New season drops every year on 20 October.</p>
+          <div class="meta"><span class="m">100% Match</span><span>Based on a true story</span><span class="tag">TRUE STORY</span><span>Volume 1</span><span class="tag">HD</span></div>
+          <p>From Jharkhand to Punjab to Barrie, Canada, Simrajit has written every chapter of her story herself. An MBA graduate who crossed an ocean, started from scratch and never stopped working for it. The hardest-working girl in any room, and the warmest. No shortcuts, no excuses, every page earned.</p>
         </div>
         <div class="i-facts">
           <div><span>Starring:</span> Simrajit Kaur Cheema</div>
-          <div><span>Birthday:</span> 20 October</div>
+          <div><span>Written by:</span> Herself</div>
           <div><span>Genres:</span> Hard Work, Big Dreams, Coffee</div>
           <div><span>This show is:</span> Inspiring, Warm, Unstoppable</div>
         </div>
@@ -410,7 +410,7 @@ header .me .sw { font-size: 13px; color: #ddd; font-weight: 600; }
         <div class="marq"><div class="trk" id="iMarq"></div></div>
       </div>
       <div>
-        <h3>About <i style="font-style:normal;color:var(--accent)">The Birthday Girl</i></h3>
+        <h3>About <i style="font-style:normal;color:var(--accent)">the Author</i></h3>
         <div class="i-about">
           <div><span>Full name:</span> Simrajit Kaur Cheema</div>
           <div><span>Born in:</span> Jharkhand, India</div>
@@ -429,7 +429,7 @@ header .me .sw { font-size: 13px; color: #ddd; font-weight: 600; }
 <div class="player" id="player" hidden role="dialog" aria-modal="true" aria-label="Episode player">
   <div class="p-top gutter">
     <button id="pBack" type="button" aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><path d="M15 5l-7 7 7 7"/></svg></button>
-    <div class="t"><b>The Birthday Girl</b><span id="pEp"></span></div>
+    <div class="t"><b>Written By Her</b><span id="pEp"></span></div>
     <button class="lst" id="pList" type="button"></button>
     <button class="lst dl" id="pDl" type="button" aria-label="Download this photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></svg><span>Download</span></button>
   </div>
@@ -470,7 +470,7 @@ if (rest.length) ROWS.push({ t: "More Episodes", ids: rest, kind: "poster" });
 const mark = document.getElementById("mark");
 const intro = document.getElementById("intro"), profiles = document.getElementById("profiles");
 let introDone = false, introTimer = 0, pfFrom = "intro";
-const WORDMARK = "PRESENT FOR YOU";
+const WORDMARK = "HER STORY";
 const bow = i => { const c = (WORDMARK.length - 1) / 2, d = (i - c) / c; return (1 + 0.32 * d * d).toFixed(3); };
 const cv = (ch, i) => `<i class="cv" style="--s:${bow(i)}">${ch === " " ? "&nbsp;" : ch}</i>`;
 function buildMark() {
@@ -511,7 +511,7 @@ document.getElementById("pfBack").addEventListener("click", () => {
 playIntro();
 
 /* Profiles */
-const PROFILES = [[22, "Birthday Girl"], [59, "Princess"], [9, "Sunshine"], [79, "Superstar"]];
+const PROFILES = [[22, "Simrajit"], [59, "Princess"], [9, "Sunshine"], [79, "Superstar"]];
 const pfgrid = document.getElementById("pfgrid");
 PROFILES.forEach(([id, name]) => {
   const b = document.createElement("button");
@@ -622,11 +622,11 @@ ROWS.forEach((r, ri) => {
   sc.addEventListener("scroll", upd, { passive: true }); addEventListener("resize", upd); setTimeout(upd, 300); upd();
 });
 
-/* Views: Home, Series, Birthdays, My List */
-const BDAY = [22, 59, 9, 79, 41, 67, 33, 60, 35, 12, 29, 57, 3, 68, 44, 47];
+/* Views: Home, Series, Chapters, My List */
+const CHAPTERS = [22, 59, 9, 79, 41, 67, 33, 60, 35, 12, 29, 57, 3, 68, 44, 47];
 const VIEWS = {
-  series: () => ({ t: "All Episodes", s: `The Birthday Girl · Season 1 · ${N} episodes`, ids: range(1, N) }),
-  birthdays: () => ({ t: "Birthday Specials", s: "Hand-picked for the big day.", ids: BDAY }),
+  series: () => ({ t: "All Episodes", s: `Written By Her · Volume 1 · ${N} episodes`, ids: range(1, N) }),
+  chapters: () => ({ t: "Her Chapters", s: "The moments that made her who she is.", ids: CHAPTERS }),
   list: () => ({ t: "My List", s: myList.length ? `${myList.length} saved episode${myList.length > 1 ? "s" : ""}` : "", ids: myList }),
 };
 const viewEl = document.getElementById("view"), vGrid = document.getElementById("vGrid");
@@ -649,7 +649,7 @@ function setView(v) {
   const home = v === "home";
   heroEl.hidden = rowsEl.hidden = !home;
   viewEl.hidden = home;
-  document.getElementById("lines").hidden = !(home || v === "birthdays");
+  document.getElementById("lines").hidden = !(home || v === "chapters");
   document.querySelectorAll("#tabs button").forEach(b => b.setAttribute("aria-current", b.dataset.view === v ? "page" : "false"));
   if (!home) renderView();
   window.scrollTo(0, 0);
@@ -712,7 +712,7 @@ document.getElementById("playBtn").onclick = () => openPlayer(22, true);
 const info = document.getElementById("info"), iSlides = document.getElementById("iSlides"), iBars = document.getElementById("iBars");
 const INFO_PICS = [22, 59, 41, 33, 67, 79, 9, 60, 35, 12, 47, 28];
 const STORY = [
-  [44, "Origins", "Jharkhand, India", "Where it all begins. Born on 20 October, and the world got a little brighter."],
+  [44, "Origins", "Jharkhand, India", "Where it all begins. A small-town girl with very big plans."],
   [9, "Home Ground", "Shri Hargobindpur, Punjab", "The hometown that shaped her: family, roots, and a heart full of Punjab."],
   [33, "The MBA Arc", "Guru Nanak Dev University Campus", "Late nights, big goals, and an MBA earned the hard way."],
   [67, "New Country, Same Spark", "Barrie, Canada", "She packed up her dreams, crossed an ocean, and started from scratch."],
@@ -769,7 +769,7 @@ document.getElementById("pBack").onclick = closePlayer;
 document.getElementById("pList").onclick = () => toggleList(cur);
 /* Download the full-size photo; fetch as a blob so the browser saves it instead of navigating, falling back to a plain download link */
 document.getElementById("pDl").onclick = async () => {
-  const src = F(cur), name = `birthday-photo-${pad(cur)}.jpg`;
+  const src = F(cur), name = `simrajit-${pad(cur)}.jpg`;
   const save = href => { const a = document.createElement("a"); a.href = href; a.download = name; document.body.appendChild(a); a.click(); a.remove(); };
   try {
     const res = await fetch(src);
