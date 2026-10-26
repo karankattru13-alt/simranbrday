@@ -286,11 +286,16 @@ header nav .bookTab { color: var(--accent-2); font-weight: 700; }
 .bk-top { width: 100%; display: flex; align-items: center; justify-content: space-between; color: #cbb9a8; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; }
 .bk-stage { display: grid; place-items: center; min-height: 0; width: 100%; touch-action: pan-y; }
 .bk { position: relative; width: min(100%, 460px, calc((100vh - 150px) * .68)); width: min(100%, 460px, calc((100dvh - 150px) * .68)); aspect-ratio: .68; perspective: 2200px; container-type: inline-size; border-radius: 3px 10px 10px 3px; box-shadow: 0 24px 60px rgba(0,0,0,.55); transition: transform 1s cubic-bezier(.645,.045,.355,1); }
-/* Once opened, read pages lie on the left of the spine: wide screens show the full spread, phones show the left page's edge */
-.bk.open { transform: translateX(8%); }
+/* Once opened, read pages lie on the left of the spine: wide screens show the full spread, phones show a stack of page edges */
+.bk.open { transform: translateX(4.5%); }
 .bk::before { content: ""; position: absolute; top: 0; bottom: 0; right: 100%; width: 100%; border-radius: 10px 3px 3px 10px; box-shadow: 0 24px 60px rgba(0,0,0,.55); opacity: 0; transition: opacity .6s; pointer-events: none; }
 .bk.open::before { opacity: 1; transition-delay: .5s; }
-@media (max-width: 699px) { .bk { width: min(86%, 460px, calc((100vh - 150px) * .68)); width: min(86%, 460px, calc((100dvh - 150px) * .68)); } }
+@media (max-width: 699px) {
+  .bk { width: min(91%, 460px, calc((100vh - 150px) * .68)); width: min(91%, 460px, calc((100dvh - 150px) * .68)); }
+  /* Too narrow for two readable pages: turned pages show only as a stack of paper edges along the spine */
+  .face.back > * { visibility: hidden; }
+  .face.back { background: repeating-linear-gradient(90deg, #e6dccd 0 1px, #f7f1e6 1px 4px); }
+}
 @media (min-width: 700px) {
   .bk { width: min(50%, 460px, calc((100vh - 150px) * .68)); width: min(50%, 460px, calc((100dvh - 150px) * .68)); }
   .bk.open { transform: translateX(50%); }
