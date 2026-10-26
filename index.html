@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Her Story</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Figtree:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Figtree:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400;1,600&family=Caveat:wght@600&display=swap">
 <style>
 /* Layout: a streaming app where her life story is the only show. Intro sting, profile picker, cinematic hero, poster rows, closing lines. */
 :root {
@@ -277,6 +277,48 @@ header .me .sw { font-size: 13px; color: #ddd; font-weight: 600; }
 @media (max-width: 699px) { .infobox { padding: 0; } .i-card { border-radius: 0; min-height: 100%; } .i-media { aspect-ratio: 4 / 5; } }
 @media (prefers-reduced-motion: reduce) { .marq .trk, .i-slide.on img { animation: none; } }
 
+/* Her Book: one page at a time, each leaf turns on its left edge like a real page */
+header nav .bookTab { color: var(--accent-2); font-weight: 700; }
+@media (max-width: 899px) { header nav .bookTab { border-color: var(--accent); order: -1; } header nav button[data-view="home"] { order: -2; } }
+.book { position: fixed; inset: 0; z-index: 180; display: grid; grid-template-rows: auto 1fr auto; justify-items: center; overflow: hidden;
+  background: radial-gradient(800px 600px at 50% 40%, #3a2420, transparent 70%), #120c0b; animation: ifade .35s ease;
+  padding: calc(10px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) calc(14px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.bk-top { width: 100%; display: flex; align-items: center; justify-content: space-between; color: #cbb9a8; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; }
+.bk-stage { display: grid; place-items: center; min-height: 0; width: 100%; touch-action: pan-y; }
+.bk { position: relative; width: min(100%, 460px, calc((100vh - 150px) * .68)); width: min(100%, 460px, calc((100dvh - 150px) * .68)); aspect-ratio: .68; perspective: 2200px; container-type: inline-size; border-radius: 3px 10px 10px 3px; box-shadow: 0 24px 60px rgba(0,0,0,.55); }
+.leaf { position: absolute; inset: 0; transform-origin: left center; transform-style: preserve-3d; cursor: pointer;
+  transition: transform 1s cubic-bezier(.645,.045,.355,1), visibility 0s; }
+.leaf.flipped { transform: rotateY(-180deg); visibility: hidden; transition: transform 1s cubic-bezier(.645,.045,.355,1), visibility 0s 1s; }
+.face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 3px 10px 10px 3px; overflow: hidden; }
+.face.back { transform: rotateY(180deg); background: linear-gradient(90deg, #e9e0d2, #f7f1e6 30%); border-radius: 10px 3px 3px 10px; }
+.face.front { background: #fbf6ee; color: #2b2220; box-shadow: inset 16px 0 22px -14px rgba(60,30,20,.35); }
+.face.front::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.35), transparent 70%); opacity: 0; transition: opacity 1s; pointer-events: none; }
+.leaf.flipped .face.front::after { opacity: 1; }
+.pg { display: grid; grid-template-rows: 44% 1fr; height: 100%; }
+.pg img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; display: block; }
+.pg .txt { position: relative; padding: 5.5cqw 8cqw 9cqw; display: grid; align-content: start; gap: 1.6cqw; font-family: "Lora", Georgia, serif; }
+.pg .kick { font-family: var(--body); font-size: clamp(10px, 2.6cqw, 12px); font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #b3243d; }
+.pg h3 { margin: 0; font-size: clamp(19px, 6.2cqw, 28px); font-weight: 600; line-height: 1.1; }
+.pg .loc { font-style: italic; color: #8a766a; font-size: clamp(11px, 3cqw, 14px); }
+.pg p { margin: 1.4cqw 0 0; font-size: clamp(12.5px, 3.75cqw, 16.5px); line-height: 1.55; }
+.pg p::first-letter { float: left; font-size: 3.1em; line-height: .82; padding: .06em .08em 0 0; color: #b3243d; font-weight: 600; }
+.pg .num { position: absolute; bottom: 3.6cqw; left: 0; right: 0; text-align: center; font-size: clamp(10px, 2.6cqw, 12px); color: #a8968a; font-style: italic; }
+.face.cover { background: linear-gradient(135deg, #8e1527, #4b0812); color: #f4dca8; display: grid; place-items: center; text-align: center; box-shadow: inset 16px 0 22px -12px rgba(0,0,0,.6); }
+.cover .frame { position: absolute; inset: 4.5cqw; border: 1.5px solid rgba(244,220,168,.55); border-radius: 4px; pointer-events: none; }
+.cover .in { display: grid; justify-items: center; gap: 3cqw; padding: 8cqw; }
+.cover img { width: 46cqw; aspect-ratio: 1; object-fit: cover; object-position: 50% 25%; border-radius: 50%; border: 3px solid #f4dca8; box-shadow: 0 10px 30px rgba(0,0,0,.45); }
+.cover small { font-family: var(--body); font-size: clamp(10px, 2.7cqw, 12px); letter-spacing: .3em; text-transform: uppercase; opacity: .85; }
+.cover h2 { margin: 0; font-family: "Lora", Georgia, serif; font-style: italic; font-weight: 600; font-size: clamp(32px, 11cqw, 52px); line-height: 1; }
+.cover p { margin: 0; font-family: "Lora", Georgia, serif; font-size: clamp(13px, 3.8cqw, 17px); }
+.cover .tap { font-family: var(--body); font-size: clamp(10px, 2.6cqw, 12px); letter-spacing: .18em; text-transform: uppercase; opacity: .6; margin-top: 2cqw; }
+.end .txt { text-align: center; justify-items: center; align-content: center; }
+.end p::first-letter { float: none; font-size: inherit; padding: 0; color: inherit; }
+.end .sig { font-family: "Caveat", cursive; font-size: clamp(30px, 10cqw, 44px); color: #b3243d; line-height: 1; margin-top: 2cqw; }
+.bk-nav { display: flex; align-items: center; gap: 16px; padding-top: 12px; }
+.bk-nav .pc { color: #cbb9a8; font-size: 13px; min-width: 64px; text-align: center; font-variant-numeric: tabular-nums; }
+.bk-nav .navbtn[disabled] { opacity: .3; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .leaf, .leaf.flipped { transition: none; } }
+
 /* Player */
 .player { position: fixed; inset: 0; z-index: 200; background: #000; display: grid; grid-template-rows: auto 1fr auto; }
 .p-top { display: flex; align-items: center; gap: 14px; padding-top: calc(14px + env(safe-area-inset-top, 0px)); padding-bottom: 10px; z-index: 2; }
@@ -340,7 +382,7 @@ header .me .sw { font-size: 13px; color: #ddd; font-weight: 600; }
 
 <header class="top gutter" id="hdr">
   <div class="logo" id="logoHome" role="link" tabindex="0" aria-label="Her Story"></div>
-  <nav id="tabs"><button type="button" data-view="home" aria-current="page">Home</button><button type="button" data-view="series">Series</button><button type="button" data-view="chapters">Chapters</button><button type="button" data-view="list">My List</button></nav>
+  <nav id="tabs"><button type="button" data-view="home" aria-current="page">Home</button><button type="button" data-view="series">Series</button><button type="button" data-view="chapters">Chapters</button><button type="button" data-view="list">My List</button><button type="button" class="bookTab" id="bookTab">📖 Her Book</button></nav>
   <button class="me" id="me" type="button" aria-label="Switch profile"><span class="av" id="meAv"></span><span class="sw">Switch profile</span><svg width="12" height="12" viewBox="0 0 24 24" fill="#fff"><path d="M5 8l7 8 7-8z"/></svg></button>
 </header>
 
@@ -385,7 +427,7 @@ header .me .sw { font-size: 13px; color: #ddd; font-weight: 600; }
       <div class="i-shade"></div>
       <div class="i-head">
         <h2 id="iTitle">Simranjit Kaur Cheema</h2>
-        <div class="btns"><button class="btn play" id="iPlay" type="button"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l12-7.5z"/></svg>Play</button></div>
+        <div class="btns"><button class="btn play" id="iPlay" type="button"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l12-7.5z"/></svg>Play</button><button class="btn info" id="iBook" type="button">📖 Read Her Book</button></div>
       </div>
     </div>
     <div class="i-body">
@@ -422,6 +464,17 @@ header .me .sw { font-size: 13px; color: #ddd; font-weight: 600; }
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- Her Book -->
+<div class="book" id="book" hidden role="dialog" aria-modal="true" aria-label="Written By Her, the book">
+  <div class="bk-top"><span>Written By Her</span><button class="navbtn" id="bkClose" type="button">Close</button></div>
+  <div class="bk-stage" id="bkStage"><div class="bk" id="bk"></div></div>
+  <div class="bk-nav">
+    <button class="navbtn" id="bkPrev" type="button" aria-label="Previous page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <span class="pc" id="bkCount" aria-live="polite"></span>
+    <button class="navbtn" id="bkNext" type="button" aria-label="Next page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
   </div>
 </div>
 
@@ -650,11 +703,11 @@ function setView(v) {
   heroEl.hidden = rowsEl.hidden = !home;
   viewEl.hidden = home;
   document.getElementById("lines").hidden = !(home || v === "chapters");
-  document.querySelectorAll("#tabs button").forEach(b => b.setAttribute("aria-current", b.dataset.view === v ? "page" : "false"));
+  document.querySelectorAll("#tabs button[data-view]").forEach(b => b.setAttribute("aria-current", b.dataset.view === v ? "page" : "false"));
   if (!home) renderView();
   window.scrollTo(0, 0);
 }
-document.querySelectorAll("#tabs button").forEach(b => b.onclick = () => setView(b.dataset.view));
+document.querySelectorAll("#tabs button[data-view]").forEach(b => b.onclick = () => setView(b.dataset.view));
 const logoHome = document.getElementById("logoHome");
 logoHome.onclick = () => setView("home");
 logoHome.onkeydown = e => { if (e.key === "Enter") setView("home"); };
@@ -801,6 +854,71 @@ stage.addEventListener("touchend", e => {
   else if (dy > 90) closePlayer();
   else if (Math.abs(dx) < 10 && Math.abs(dy) < 10) setPlaying(!playing);
   sx = null;
+});
+
+/* Her Book: an autobiography in her own words, one chapter per page */
+const BOOK = [
+  [79, "Chapter One", "Where I Began", "Jharkhand, India", "I was born in Jharkhand, a small-town girl with very big plans. I don't remember when I started dreaming, only that I never stopped. This is where I learned to be warm to everyone and scared of nothing. Every story needs a first page. This was mine."],
+  [33, "Chapter Two", "Roots in Punjab", "Shri Hargobindpur, Punjab", "Shri Hargobindpur is home. It's where my family is and where my roots run deepest. Punjab gave me my laugh, my love for a beautiful suit, and a heart that always finds its way back home, no matter how far away I go."],
+  [44, "Chapter Three", "The MBA Years", "Guru Nanak Dev University Campus", "Late nights, endless assignments, and more than a few moments I wanted to quit. I didn't. I earned my MBA, and it taught me something bigger than business: I can finish anything I start, as long as I keep showing up."],
+  [67, "Chapter Four", "Across the Ocean", "Barrie, Ontario, Canada", "Then I did the bravest thing I've ever done. I packed my dreams into a suitcase and crossed an ocean. New country, new weather, nobody who knew my name. I started from zero, and slowly, a strange new place started to feel like mine."],
+  [71, "Chapter Five", "Earning Every Page", "From Popeyes to Starbucks", "My first job in Canada was at Popeyes: long shifts, tired feet, zero complaints. Today I'm at Starbucks, still the hardest worker on every shift, still smiling. Nobody handed me any of this. I earned every page, and I'm proud of the girl who did."],
+];
+const book = document.getElementById("book"), bk = document.getElementById("bk"), bkCount = document.getElementById("bkCount");
+let leaves = [], bkAt = 0;
+function buildBook() {
+  const pages = [
+    `<div class="face front cover"><div class="frame"></div><div class="in"><small>An Autobiography</small><img src="${F(59)}" alt="Simranjit"><h2>Written By Her</h2><p>Simranjit Kaur Cheema</p><span class="tap">Tap to open</span></div></div>`,
+    ...BOOK.map(([id, kick, title, loc, txt], k) => `<div class="face front pg"><img src="${F(id)}" alt=""><div class="txt"><span class="kick">${kick}</span><h3>${title}</h3><span class="loc">${loc}</span><p>${txt}</p><span class="num">— ${k + 1} —</span></div></div>`),
+    `<div class="face front pg end"><img src="${F(41)}" alt=""><div class="txt"><span class="kick">Epilogue</span><h3>To Be Continued…</h3><p>The best chapters of my story haven't been written yet. But one thing is for sure: I'll be the one writing them.</p><span class="sig">— Simranjit</span></div></div>`,
+  ];
+  leaves = pages.map((html, i) => {
+    const l = document.createElement("div");
+    l.className = "leaf"; l.style.zIndex = pages.length - i;
+    l.innerHTML = html + '<div class="face back"></div>';
+    bk.appendChild(l);
+    return l;
+  });
+}
+function bookSync() {
+  leaves.forEach((l, i) => l.setAttribute("aria-hidden", i !== bkAt));
+  bkCount.textContent = `${bkAt + 1} / ${leaves.length}`;
+  document.getElementById("bkPrev").disabled = bkAt === 0;
+  document.getElementById("bkNext").disabled = bkAt === leaves.length - 1;
+}
+function bookGo(d) {
+  if (d > 0 && bkAt < leaves.length - 1) leaves[bkAt++].classList.add("flipped");
+  if (d < 0 && bkAt > 0) leaves[--bkAt].classList.remove("flipped");
+  bookSync();
+}
+function openBook() {
+  if (!leaves.length) buildBook();
+  leaves.forEach(l => l.classList.remove("flipped")); bkAt = 0;
+  book.hidden = false; document.body.style.overflow = "hidden";
+  bookSync();
+  document.getElementById("bkNext").focus();
+}
+function closeBook() { book.hidden = true; document.body.style.overflow = ""; }
+document.getElementById("bookTab").onclick = openBook;
+document.getElementById("iBook").onclick = () => { closeInfo(); openBook(); };
+document.getElementById("bkClose").onclick = closeBook;
+document.getElementById("bkPrev").onclick = () => bookGo(-1);
+document.getElementById("bkNext").onclick = () => bookGo(1);
+bk.addEventListener("click", e => { const r = bk.getBoundingClientRect(); bookGo(e.clientX - r.left < r.width * .3 ? -1 : 1); });
+addEventListener("keydown", e => {
+  if (book.hidden) return;
+  if (e.key === "Escape") closeBook();
+  if (e.key === "ArrowRight") bookGo(1);
+  if (e.key === "ArrowLeft") bookGo(-1);
+});
+const bkStage = document.getElementById("bkStage");
+let bx = null;
+bkStage.addEventListener("touchstart", e => { bx = e.touches[0].clientX; }, { passive: true });
+bkStage.addEventListener("touchend", e => {
+  if (bx === null) return;
+  const dx = e.changedTouches[0].clientX - bx;
+  if (Math.abs(dx) > 45) { e.preventDefault(); bookGo(dx < 0 ? 1 : -1); }
+  bx = null;
 });
 heroGo(0);
 </script>
